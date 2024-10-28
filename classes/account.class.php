@@ -4,10 +4,10 @@ require_once 'database.php';
 
 class Account{
     public $id = '';
-    public $first_name = '';
-    public $last_name = '';
-    public $username = '';
-    public $password = '';
+    public $first_name = 'admin';
+    public $last_name = 'admin';
+    public $username = 'admin';
+    public $password = '12345';
     public $role = 'staff';
     public $is_staff = true;
     public $is_admin = false;
@@ -77,6 +77,18 @@ class Account{
         $data = null;
         if($query->execute()){
             $data = $query->fetch();
+        }
+
+        return $data;
+    }
+
+    function fetchAll(){
+        $sql = "SELECT * FROM account;";
+        $query = $this->db->connect()->prepare($sql);
+
+        $data = null;
+        if($query->execute()){
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $data;
